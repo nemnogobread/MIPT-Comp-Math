@@ -14,25 +14,25 @@ def get_diff(u, l, m, h):
     return diff
 
 if __name__ == "__main__":
-    p_list = []
+    p_list = [2**i for i in range(1, 7)]
     diff_list = []
     error_list = []
-    for i in range(1, 7):
-        p_list.append(2**i)
 
-    a = np.pi/3
-    b = np.pi/2
+    a = np.pi/3     # левая граница
+    b = np.pi/2     # правая граница
     
     for i in range(0, len(p_list)):
         p = p_list[i]
-        x = np.linspace(a, b, p+1)
-        u = np.sin(x)
-        h = (b-a)/p
-        diff = get_diff(u, 0, p, h)
+        x = np.linspace(a, b, p+1)      # наложение сетки
+        u = np.sin(x)       # значения синуса в точках сетки
+        h = (b-a)/p     # шаг сетки
+        diff = get_diff(u, 0, p, h)     # считаем дифференциал в точке a
         diff_list.append(diff)
-        error_list.append(abs(diff - 0.5))
+        error_list.append(abs(diff - 0.5))      # считаем ошибку как разность (sin(pi/3) = 0.5) 
+
+    #print(p_list)
+    #print(diff_list)
 
     plt.xscale("log")
     plt.plot(p_list, error_list)
     plt.show()
-
