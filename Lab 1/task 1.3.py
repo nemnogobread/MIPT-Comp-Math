@@ -22,13 +22,13 @@ def get_p(a, h):
     diff_c2 = central_difference(a, h/2)
     err_c1 = diff_c1 - 0.5
     err_c2 = diff_c2 - 0.5
-    p_central = np.log2(err_c1/err_c2)
+    p_central = np.log2(float(err_c1)/float(err_c2))
 
     return p_directional, p_central
 
 
 if __name__ == "__main__":
-    h_list = [2**(-i) for i in range(1, 10)]
+    h_list = [2**(i) for i in range(-16, 14)]
     p_list_directional = []
     p_list_central = []
 
@@ -45,5 +45,6 @@ if __name__ == "__main__":
     #print(p_list_central)
 
     plt.xscale("log")
-    plt.plot(p_list, cond_list)
+    plt.plot(h_list, p_list_directional)
+    plt.plot(h_list, p_list_central)
     plt.show()
